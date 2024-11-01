@@ -1,0 +1,20 @@
+Comandos de base de datos.
+
+'php artisan db:wipe' para borrar la base de datos
+'php artisan migrate' para crear base de datos nueva
+'php artisan migrate:rollback' para deshacer último cambio a la base de datos
+'php artisan migrate:fresh' para actualizar estructura de base de datos
+'php artisan db:seed' para seedear nuestra base de datos
+Ir a database/migrations para modificar tablas de la base de datos
+Ir a app/Models para consonar valores modificados
+
+Comandos de controladores, modelos, event listeners, etc
+
+'php artisan route:list' para listar las rutas.
+'php artisan make:component NombreComponente --view' para crear componente vista principal
+'php artisan make:model NombreModelo -a' para crear modelo (-a para generar además otros documentos útiles como migration, controlador, seeder, factory, policy para autorización, etc).
+'php artisan make:controller NombreControlador' para crear controlador.
+'php artisan make:mail NombreMail' para crear clase Maileable para envío de emails.
+'php artisan make:event' para crear evento.
+'php artisan make:listener' para crear listener que manejará el evento.
+'php artisan storage:link' para crear enlace simbólico entre public/storage y storage/app/public
