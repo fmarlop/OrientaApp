@@ -66,6 +66,15 @@
     h3 {
         @apply font-bold text-lg mb-4;
     }
+    h4 {
+        @apply font-medium text-lg mb-4;
+    }
+    h5 {
+        @apply font-medium text-base mb-4;
+    }
+    h6 {
+        @apply font-bold text-base mb-4;
+    }
     a{
         @apply text-indigo-500 font-medium;
     }
@@ -105,6 +114,9 @@
     .posts-grid { /* rejilla de posts */
         @apply grid grid-cols-1 md:grid-cols-2 gap-6;
     }
+    .menu-grid { /* rejilla del menu */
+        @apply flex flex-wrap justify-evenly;
+    }
     .crud-img { /* imagen old en editar post*/
         @apply rounded-md py-2 mb-4 max-h-48 max-w-96;
     }
@@ -116,6 +128,34 @@
     }
     .card { /* tarjeta generica */
         @apply gap-6 bg-slate-50 p-8 rounded-xl shadow-md border border-indigo-200 mx-auto max-w-screen-sm; 
+    }
+
+    .test { /* tarjeta de tests */
+        @apply w-3/4 mx-auto;
+    }
+    .test div{ /* cada div de la tarjeta */
+        @apply flex flex-col text-center items-center ;
+    }
+    .test h5{
+        @apply text-center;
+    }
+    .test label {
+        @apply text-gray-600;
+    }
+    .test input[type="range"] { /* tarjeta slider */
+        @apply w-full h-8 my-6 mb-10 rounded-xl appearance-none bg-slate-300;
+    }
+    .test input[type="range"]::-webkit-slider-thumb, .test input[type="range"]::-moz-range-thumb { /* puntito del slider, y para Firefox */
+        @apply h-16 w-16 bg-indigo-600 rounded-full cursor-pointer;
+    }
+    .test button {
+        @apply px-5 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md transition duration-300 ease-in-out hover:bg-indigo-600/80;
+    }
+    .test button[name="action"][value="previous"] { /* boton retroceso */
+        @apply float-left;
+    }
+    .test button[name="action"][value="next"], .test button[name="action"]:not([value]) { /* boton avance */
+        @apply float-right;
     }
     .dash { /* tarjeta panel */
         @apply mb-6 max-w-screen-md;
@@ -150,6 +190,15 @@
     .post-links {
         @apply m-4;
     }
+    .menu { /* elemento menu */
+        @apply w-64 max-w-xs text-center;
+    }
+    .menu img{
+        @apply rounded-3xl w-48 mx-auto shadow-md border-indigo-600/70 border-2 overflow-hidden self-start;
+    }
+    .menu h2{
+        @apply my-4 text-indigo-700/90;
+    }
     .rank { /* elemento ranking */
         @apply flex items-center gap-6 p-6 border-t-2 border-indigo-600/20 mx-auto max-w-screen-sm;
     }
@@ -159,7 +208,7 @@
     .rank h2{
         @apply w-4/6 pl-4;
     }
-    .rank p{ 
+    .rank p{
         @apply w-1/6 text-center text-4xl font-bold shadow-orange-200 drop-shadow-md text-yellow-600; 
     }
     .rank .rfir{ /* colores de los numeros: pink red orange yellow lime green teal */

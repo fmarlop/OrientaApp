@@ -6,7 +6,7 @@
     
     <h1>Test de Competencias y Preferencias</h1>
 
-    <div class="card">
+    <div class="test">
 
         <h5>Paso {{ session('currentStep', 1) }} de {{$total_steps}} </h6> {{-- Número de paso --}}
             
@@ -243,7 +243,7 @@
             @endif
             
             @if($currentStep > 1)
-            <button type="submit" name="action" value="previous">-</button>
+            <button type="submit" name="action" value="previous">Anterior</button>
             @endif
             @if($currentStep < $total_steps)
             <button type="submit" name="action" value="next">Siguiente</button>
