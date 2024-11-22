@@ -3,6 +3,7 @@
 # /public/build
 # /public/hot
 /public/storage
+# mejor no ignorar /public/storage porque git no puede indexar enlaces simbolicos
 /storage/*.key
 /vendor
 # .env
