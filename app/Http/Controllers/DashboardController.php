@@ -15,7 +15,7 @@ class DashboardController extends Controller // implements HasMiddleware
 
     public function index(){
 
-        $posts = Auth::user()->posts()->latest()->paginate(6); // consigo los posts del usuario ordenados por fecha y paginados mostrando 6 por página, a través de la propiedad posts del usuario atenticado.
+        $posts = Auth::user()->posts()->latest()->paginate(12); // consigo los posts del usuario ordenados por fecha y paginados mostrando 12 por página, a través de la propiedad posts del usuario atenticado.
 
         // $posts = Post::where('user_id', Auth::id())->get(); // consigo los posts del usuario, indicando que consiga los posts donde el 'user_id' es el 'id' del usuario autenticado. Pero en vez de esto voy a utilizar la relación uno muchos que he establecido entre User y Post para obtener los posts.
 
@@ -23,7 +23,7 @@ class DashboardController extends Controller // implements HasMiddleware
     }
 
     public function userPosts(User $user){ // función para devolver vista de los posts de un usuario. Paso modelo user como parametro para obtener datos de la instancia de usuario actual.
-        $userPosts = $user->posts()->latest()->paginate(8); // igual que en index, obtenemos los posts de este usuario por orden más reciente y paginados y luego lo paso como parametro en la vista.
+        $userPosts = $user->posts()->latest()->paginate(12); // igual que en index, obtenemos los posts de este usuario por orden más reciente y paginados y luego lo paso como parametro en la vista.
         return view('users.posts', [
              'posts' => $userPosts,
              'user' => $user

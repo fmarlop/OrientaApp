@@ -31,7 +31,7 @@ class PostController extends Controller implements HasMiddleware // es interesan
      */
     public function index()
     {
-        $posts = Post::latest()->paginate(8); // obtengo todos los posts en la base de datos ordenados por fecha de creación, con 8 posts por página y los guardo en la variable $posts. "latest()" es igual a "orderBy('created_at', 'desc')".
+        $posts = Post::latest()->paginate(perPage: 12); // obtengo todos los posts en la base de datos ordenados por fecha de creación, con 8 posts por página y los guardo en la variable $posts. "latest()" es igual a "orderBy('created_at', 'desc')".
 
         return view('posts.index', ['posts' => $posts]); // a la función view podemos pasarle como segundo argumento un array de datos, que luego podremos mostrar.
     } 

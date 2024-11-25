@@ -51,7 +51,7 @@
     </main>
 
     <footer>
-        <h4>Pie de página</h4>
+        <a href="#"><span>Volver arriba</span><i class="fa-regular fa-circle-up text-3xl animate-bounce"></i></a>
     </footer>
     
     <script> // script para que los botones de formularios reaccionen a la espera.
