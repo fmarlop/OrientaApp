@@ -46,9 +46,7 @@
         </nav>
     </header>
 
-    <main>
-        {{ $slot }} {{-- uso variables especiales slot para mostrar datos/secciones dinámicas. --}}
-    </main>
+    {{ $slot }} {{-- uso variables especiales slot para mostrar datos/secciones dinámicas. --}}
 
     <footer>
         <a href="#"><span>Volver arriba</span><i class="fa-regular fa-circle-up text-3xl animate-bounce"></i></a>

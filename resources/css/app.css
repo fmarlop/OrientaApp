@@ -59,7 +59,7 @@
         @apply block mb-2 text-xs text-indigo-500;
     }
     main {
-        @apply lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl w-full mx-auto py-8 px-4 flex-grow;
+        @apply lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl w-full mx-auto py-8 flex-grow;
     }
     
     /* otros */
@@ -83,6 +83,111 @@
     }
     a{
         @apply text-indigo-500 font-medium;
+    }
+    section div { /* seccion del slideshow principal con el clip path */
+        @apply relative w-full h-[650px];
+        animation: slideclip 9s forwards;
+    }
+    section img { /* seccion del slideshow principal */
+        @apply absolute top-0 w-full h-full opacity-0;
+    }
+    section h1 {
+        @apply absolute inset-0 py-72 mx-32 flex flex-col text-center text-5xl font-bold text-indigo-800;
+        opacity: 0; /* Inicialmente invisible */
+        pointer-events: none; /* Para que el texto no interfiera con las interacciones de la imagen */
+    }
+    @keyframes slidetext1 {
+        0%{
+            opacity: 0;
+            transform: translateX(25%);
+        }
+        10%, 23%{
+            opacity: 1;
+            transform: translateX(25%);
+        }
+        43%{
+            opacity: 0;
+            transform: translateX(-25%);
+        }
+    }
+    @keyframes slidetext2 {
+        0%{
+            opacity: 0;
+            transform: translateX(25%);
+        }
+        23%{
+            opacity: 0;
+            transform: translateX(25%);
+        }
+        43%, 56%{
+            opacity: 1;
+            transform: translateX(-25%);
+        }
+        76%{
+            opacity: 0;
+            transform: translate(-15%, 20%);
+        }
+    }
+    @keyframes slideclip {
+        0%{
+            clip-path: circle(0% at 25% 50%);
+        }
+        10%, 23%{
+            clip-path: circle(25% at 25% 50%);
+        }
+        43%, 56%{
+            clip-path: circle(25% at 75% 50%);
+        }
+        76%{
+            clip-path: circle(85% at 50% 50%);
+        }
+    }
+    @keyframes slide1 {
+        0%, 23%{
+            opacity: 1;
+        }
+        43%, 56%{
+            opacity: 0;
+        }
+        76%, 100% {
+            opacity: 1;
+        }
+    }
+    @keyframes slide2 {
+        0%, 23%{
+            opacity: 0;
+        }
+        43%, 100%{
+            opacity: 1;
+        }
+    }
+    @keyframes slide3 {
+        0%, 56% {
+            opacity: 0;
+        }
+        76%, 100% {
+            opacity: 1;
+        }
+    }
+    section img:nth-child(1) {
+        @apply object-cover object-top;
+        animation: slide3 9s forwards;
+    }
+    section img:nth-child(2) {
+        @apply object-cover;
+        animation: slide1 9s forwards;
+        transform: translateX(-25%);
+    }
+    section img:nth-child(3) {
+        @apply w-auto align-middle; /* #TODO */
+        animation: slide2 9s forwards;
+        transform: translateX(25%);
+    }
+    section h1:nth-child(2) {
+        animation: slidetext1 9s forwards;
+    }
+    section h1:nth-child(3) {
+        animation: slidetext2 9s forwards;
     }
     form div{ /* cajas de un formulario */
         @apply mb-4;
