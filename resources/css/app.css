@@ -85,16 +85,34 @@
         @apply text-indigo-500 font-medium;
     }
     section div { /* seccion del slideshow principal con el clip path */
-        @apply relative w-full h-[650px];
+        @apply relative w-full h-[650px] rounded-md overflow-hidden;
         animation: slideclip 9s forwards;
     }
     section img { /* seccion del slideshow principal */
-        @apply absolute top-0 w-full h-full opacity-0;
+        @apply absolute h-full w-full opacity-0;
+    }
+    section img:nth-child(2) {
+        @apply object-contain object-center;
+        animation: slide1 9s forwards;
+    }
+    section img:nth-child(3) {
+        @apply object-contain object-center;
+        animation: slide2 9s forwards;
+    }
+    section img:nth-child(1) {
+        @apply object-cover object-top top-0;
+        animation: slide3 9s forwards;
     }
     section h1 {
         @apply absolute inset-0 py-72 mx-32 flex flex-col text-center text-5xl font-bold text-indigo-800;
         opacity: 0; /* Inicialmente invisible */
         pointer-events: none; /* Para que el texto no interfiera con las interacciones de la imagen */
+    }
+    section h1:nth-child(2) {
+        animation: slidetext1 9s forwards;
+    }
+    section h1:nth-child(3) {
+        animation: slidetext2 9s forwards;
     }
     @keyframes slidetext1 {
         0%{
@@ -152,6 +170,15 @@
         76%, 100% {
             opacity: 1;
         }
+        0%{
+            transform: translate(-20%, 0%) scale(1);
+        }
+        43%, 56%{
+            transform: translate(-30%, 0%) scale(1);
+        }
+        100%{
+            transform: translate(-25%, 20%) scale(0.3);
+        }
     }
     @keyframes slide2 {
         0%, 23%{
@@ -159,6 +186,15 @@
         }
         43%, 100%{
             opacity: 1;
+        }
+        0%, 23%{
+            transform: translate(20%, 0%) scale(1);
+        }
+        56%{
+            transform: translate(30%, 0%) scale(1);
+        }
+        100%{
+            transform: translate(25%, 20%) scale(0.3);
         }
     }
     @keyframes slide3 {
@@ -168,26 +204,6 @@
         76%, 100% {
             opacity: 1;
         }
-    }
-    section img:nth-child(1) {
-        @apply object-cover object-top;
-        animation: slide3 9s forwards;
-    }
-    section img:nth-child(2) {
-        @apply object-cover;
-        animation: slide1 9s forwards;
-        transform: translateX(-25%);
-    }
-    section img:nth-child(3) {
-        @apply w-auto align-middle; /* #TODO */
-        animation: slide2 9s forwards;
-        transform: translateX(25%);
-    }
-    section h1:nth-child(2) {
-        animation: slidetext1 9s forwards;
-    }
-    section h1:nth-child(3) {
-        animation: slidetext2 9s forwards;
     }
     form div{ /* cajas de un formulario */
         @apply mb-4;
