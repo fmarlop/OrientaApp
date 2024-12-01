@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\UserSubscribed;
 use App\Mail\WelcomeMail;
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -31,7 +32,7 @@ class PostController extends Controller implements HasMiddleware // es interesan
      */
     public function index()
     {
-        $posts = Post::latest()->paginate(perPage: 12); // obtengo todos los posts en la base de datos ordenados por fecha de creación, con 8 posts por página y los guardo en la variable $posts. "latest()" es igual a "orderBy('created_at', 'desc')".
+        $posts = Post::latest()->paginate(perPage: 12); // obtengo todos los posts en la base de datos ordenados por fecha de creación, con 12 posts por página y los guardo en la variable $posts. "latest()" es igual a "orderBy('created_at', 'desc')".
 
         return view('posts.index', ['posts' => $posts]); // a la función view podemos pasarle como segundo argumento un array de datos, que luego podremos mostrar.
     } 
@@ -77,9 +78,15 @@ class PostController extends Controller implements HasMiddleware // es interesan
     /**
      * Display the specified resource. Renderizar post individual.
      */
-    public function show(Post $post)
+    public function show(Post $post, Comment $comment)
     {
-        return view('posts.show', [ 'post' => $post ]);
+        
+        $comments = $post->comments()->oldest()->paginate(10); // obtengo todos los comentarios del post en la base de datos ordenados por fecha de creación, con 10 comentarios por página y los guardo en la variable $comments. "oldest()" es igual a "orderBy('created_at', 'asc?')".
+        
+        return view('posts.show', [
+            'post' => $post,
+            'comments' => $comments
+        ]);
     }
 
     /**

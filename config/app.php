@@ -2,6 +2,10 @@
 
 return [
 
+    /*'providers' => [
+        LdapRecord\Laravel\LdapRecordServiceProvider::class,
+    ],/*
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

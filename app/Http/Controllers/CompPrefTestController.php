@@ -8,10 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class CompPrefTestController extends Controller
 {
-    public function render() {
-        return view('multi.comp-pref'); //->layout('components.layout');
+    public function prerender() {
+        return view('multi.comp-pref-main'); //->layout('components.layout');
     }
     
+    public function render() {
+        return view('multi.comp-pref'); //->layout('components.layout');
+    } 
+
     public function update(Request $request){
         
         // Obtener el paso actual desde la sesión o establecerlo en 1 si no existe

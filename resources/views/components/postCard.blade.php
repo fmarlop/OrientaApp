@@ -1,6 +1,6 @@
 @props(['post', 'full' => false ]) {{-- creo componente para tarjetas de cada posts, ya que van a ser usadas en diferentes vistas, creando la propiedad post donde pasaré la info de cada post que construya esta tarjeta y la propiedad full donde indicaré si el post se debe mostrar completo o no. --}}
 
-<div class="post card">
+<div class="@if ($full) postcomment @else post @endif card">
     {{-- Foto portada --}}
     <div>
         @if ($post->image) {{-- '($post->image)' en caso de que quisiera usar una imagen por defecto--}}

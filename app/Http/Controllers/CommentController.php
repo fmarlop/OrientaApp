@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -27,9 +29,19 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCommentRequest $request)
+    public function store(Request $request)
     {
-        //
+        // Validar
+        $fields = $request->validate([
+            'body' => ['required'],
+            'post_id' => ['required', 'exists:posts,id']
+        ]);
+
+        // Crear comment
+        $comment = Auth::user()->comments()->create($fields); // creo un comment a través de la instancia del usuario.
+
+        // Redireccionar usuario a donde estaba
+        return back()->with('success', 'Tu post se ha publicado'); // con esta función with() puedo introducir dos argumentos llave valor que luego podré mostrar en pantalla.
     }
 
     /**

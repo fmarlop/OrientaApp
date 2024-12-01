@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CompatibilityController;
 use App\Http\Controllers\CompPrefTestController;
 use App\Http\Controllers\DashboardController;
@@ -13,10 +14,13 @@ Route::view('/', 'posts.main')->name('home'); // renombro las rutas con esta fun
 // route::redirect('/', 'posts'); // en caso de querer redirigir desde la página principal a posts.index
 
 Route::resource('posts', PostController::class); // método resource() para la definición de todas las rutas para controladores de recursos.
+Route::resource('comments', CommentController::class); // método resource() para la definición de todas las rutas para controladores de recursos.
 
 // Renombrar rutas creadas con resource?
 
-Route::get('/{user}/posts', [DashboardController::class, 'userPosts'])->name('userposts'); //para crear una página dinámica de posts del usuario para cada usuario necesito bindear modelo usuario para usar la instancia del usuario como parametro para la uri, con las llaves {}.
+Route::get('/{user}/posts', [DashboardController::class, 'userPosts'])->name('userposts'); // para crear una página dinámica de posts del usuario para cada usuario necesito bindear modelo usuario para usar la instancia del usuario como parametro para la uri, con las llaves {}.
+
+Route::get('/compprefmain', [CompPrefTestController::class, 'prerender'])->name('compprefmain');
 
 Route::middleware('auth')->group(function() { // '->middleware('auth')' Con esta función encadenada podría proteger el acceso a una ruta para usuarios no autenticados, y nos redirigiría automaticamente a la vista de logeo. Pero en vez de esto, voy a usar la función desde route para agrupar todas las rutas posibles. El método 'group()' toma una función callback con la que puedo envolver a las rutas.
     

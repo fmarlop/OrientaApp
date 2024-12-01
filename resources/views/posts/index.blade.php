@@ -8,5 +8,6 @@
 			@endforeach
 		</div>
 		<x-postLinks :posts="$posts" />
+		<x-createPost />
 	</main>
 </x-layout>
