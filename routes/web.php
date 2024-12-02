@@ -7,6 +7,7 @@ use App\Http\Controllers\CompPrefTestController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ResetPasswordController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'posts.main')->name('home'); // renombro las rutas con esta función para que la navegación siga funcionando aunque cambie las URLs.
@@ -21,6 +22,13 @@ Route::resource('comments', CommentController::class); // método resource() par
 Route::get('/{user}/posts', [DashboardController::class, 'userPosts'])->name('userposts'); // para crear una página dinámica de posts del usuario para cada usuario necesito bindear modelo usuario para usar la instancia del usuario como parametro para la uri, con las llaves {}.
 
 Route::get('/compprefmain', [CompPrefTestController::class, 'prerender'])->name('compprefmain');
+
+Route::get('lang/{locale}', function ($locale) { // para cambiar el locale
+    if (in_array($locale, ['es', 'en'])) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('language.switch');
 
 Route::middleware('auth')->group(function() { // '->middleware('auth')' Con esta función encadenada podría proteger el acceso a una ruta para usuarios no autenticados, y nos redirigiría automaticamente a la vista de logeo. Pero en vez de esto, voy a usar la función desde route para agrupar todas las rutas posibles. El método 'group()' toma una función callback con la que puedo envolver a las rutas.
     

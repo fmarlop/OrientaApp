@@ -40,6 +40,12 @@
     .home-btn { /* boton home */
         @apply w-24;
     }
+    .lang{ /* selector de idiomas */
+        @apply inline-flex min-w-28
+    }
+    .lang img{
+        @apply w-8 h-6
+    }
     .deploy-box { /* caja con boton y menu desplegable */
         @apply relative grid place-items-center;
     }

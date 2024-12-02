@@ -16,9 +16,15 @@
 <body>
     <header>
         <nav>
+            {{-- Links principales --}}
             <div class="link-group">
                 <a href="{{ route('home') }}" class="home-btn"><img src="{{ asset('storage/' . 'web_images/OrientaLogox128.png') }}" alt="" /></a> {{-- uso funciones de ayuda route para la navegación. No usar ruta directamente sino función asset() porque si no no puede acceder desde las rutas crud creadas con la función resources() --}}
                 <a href="{{ route('posts.index') }}">Comunidad</a>
+            </div>
+            {{-- Idiomas --}}
+            <div class="lang">
+                <a href="{{ route('language.switch', ['locale' => 'es']) }}"><img src="{{ asset('storage/' . 'web_images/es.jpg') }}" alt="Español" /></a>
+                <a href="{{ route('language.switch', ['locale' => 'en']) }}"><img src="{{ asset('storage/' . 'web_images/en.jpg') }}" alt="Inglés" /></a>
             </div>
             @auth {{-- directiva para mostrar contenido si estamos logeados --}}
                 <div class="deploy-box" x-data="{ open: false }"> {{-- añado funcionalidad de Alpine.js a este contenedor con 'x-data', y defino la variable 'open' --}}

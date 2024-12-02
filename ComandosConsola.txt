@@ -18,3 +18,4 @@ Comandos de controladores, modelos, event listeners, etc
 'php artisan make:event' para crear evento.
 'php artisan make:listener' para crear listener que manejará el evento.
 'php artisan storage:link' para crear enlace simbólico entre public/storage y storage/app/public
+'php artisan lang:publish' para generar archivos de lenguaje
