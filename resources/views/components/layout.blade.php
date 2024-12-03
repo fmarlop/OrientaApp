@@ -19,12 +19,21 @@
             {{-- Links principales --}}
             <div class="link-group">
                 <a href="{{ route('home') }}" class="home-btn"><img src="{{ asset('storage/' . 'web_images/OrientaLogox128.png') }}" alt="" /></a> {{-- uso funciones de ayuda route para la navegación. No usar ruta directamente sino función asset() porque si no no puede acceder desde las rutas crud creadas con la función resources() --}}
-                <a href="{{ route('posts.index') }}">Comunidad</a>
+                <a href="{{ route('posts.index') }}">{{ __('Comunidad') }}</a>
             </div>
             {{-- Idiomas --}}
-            <div class="lang">
-                <a href="{{ route('language.switch', ['locale' => 'es']) }}"><img src="{{ asset('storage/' . 'web_images/es.jpg') }}" alt="Español" /></a>
-                <a href="{{ route('language.switch', ['locale' => 'en']) }}"><img src="{{ asset('storage/' . 'web_images/en.jpg') }}" alt="Inglés" /></a>
+            <div class="lang" x-data="{ lang: false }">
+                <button x-on:click="lang = !lang">
+                    <img src="{{ asset('storage/web_images/' . app()->getLocale() . '.jpg') }}" alt="{{ app()->getLocale() }}" />
+                    {{ strtoupper(app()->getLocale()) }}
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div x-show="lang" x-on:click.outside="lang=false">
+                    <a href="{{ route('language.switch', ['locale' => 'es']) }}"><img src="{{ asset('storage/' . 'web_images/es.jpg') }}" alt="Español" /></a>
+                    <a href="{{ route('language.switch', ['locale' => 'en']) }}"><img src="{{ asset('storage/' . 'web_images/en.jpg') }}" alt="Inglés" /></a>
+                </div>
             </div>
             @auth {{-- directiva para mostrar contenido si estamos logeados --}}
                 <div class="deploy-box" x-data="{ open: false }"> {{-- añado funcionalidad de Alpine.js a este contenedor con 'x-data', y defino la variable 'open' --}}
@@ -35,18 +44,18 @@
                     {{-- Menú desplegable --}}
                     <div x-show="open" x-on:click.outside='open=false' class="deployable"> {{-- para mostrar o no este contenido uso 'x-show' de Alpine.js que toma el valor de la variable 'open'. Y si clico fuera del botón tampoco mostrará el contenido. --}}
                         <p>{{ auth()->user()->username }}</p> {{-- hago que muestre el nombre del usuario, función auxiliar auth() que nos devuelve el usuario autenticado, función auxiliar user() que nos devuelve la instancia del usuario, y de ello la propiedad username. --}}
-                        <a href="{{ route('dashboard') }}">Panel</a>
+                        <a href="{{ route('dashboard') }}">{{ __('Panel') }}</a>
                         <form action="{{ route('logout') }}" method="post">
                             @csrf
-                            <button>Cerrar sesión</button>
+                            <button>{{ __('Cerrar sesión') }}</button>
                         </form>
                     </div>
                 </div>
             @endauth
             @guest {{-- directiva para mostrar contenido si no estamos logeados --}}
                 <div class="link-group">
-                    <a href="{{ route('login') }}">Iniciar sesión</a>
-                    <a href="{{ route('register') }}">Registrarse</a>
+                    <a href="{{ route('login') }}">{{ __('Iniciar sesión') }}</a>
+                    <a href="{{ route('register') }}">{{ __('Registrarse') }}</a>
                 </div>
             @endguest
         </nav>
@@ -55,7 +64,7 @@
     {{ $slot }} {{-- uso variables especiales slot para mostrar datos/secciones dinámicas. --}}
 
     <footer>
-        <a href="#"><span>Volver arriba</span><i class="fa-regular fa-circle-up text-3xl animate-bounce"></i></a>
+        <a href="#"><span>{{ __('Volver arriba') }}</span><i class="fa-regular fa-circle-up text-3xl animate-bounce"></i></a>
     </footer>
     
     <script> // script para que los botones de formularios reaccionen a la espera.

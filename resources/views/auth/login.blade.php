@@ -1,6 +1,6 @@
 <x-layout>
 	<main>
-		<h1>Iniciar sesión</h1>
+		<h1>{{ __('Iniciar sesión') }}</h1>
 	
 		{{-- Mensaje de sesión --}}
 		@if (session('status'))
@@ -21,9 +21,9 @@
 				<div class="form-line">
 					<div>
 						<input type="checkbox" name="remember" id="remember">
-						<label for="remember">Recuérdame</label>
+						<label for="remember">{{ __('Recuérdame') }}</label>
 					</div>
-					<a href="{{ route('password.request')}}">¿Olvidaste tu contraseña?</a>
+					<a href="{{ route('password.request')}}">{{ __('¿Olvidaste tu contraseña?') }}</a>
 				</div>
 				
 				@error('failed')
@@ -31,7 +31,7 @@
 				@enderror
 	
 				{{-- Botón Logear --}}
-				<button class="btn" x-ref="btn">Iniciar</button>
+				<button class="btn" x-ref="btn">{{ __('Iniciar') }}</button>
 			
 			</form>
 		</div>

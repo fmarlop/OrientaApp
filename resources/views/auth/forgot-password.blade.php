@@ -1,6 +1,6 @@
 <x-layout>
 	<main>
-		<h1>Recibir email de restablecimiento de contraseña</h1>
+		<h1>{{ __('Recibir email de restablecimiento de contraseña') }}</h1>
 		
 		{{-- Mensaje de sesión --}}
 		@if (session('status'))
@@ -15,8 +15,7 @@
 				<x-emailField />
 	
 				{{-- Botón Logear --}}
-				<button class="btn" x-ref="btn">Recibir</button>
-			
+				<button class="btn" x-ref="btn">{{ __('Recibir') }}</button>
 			</form>
 		</div>
 	</main>

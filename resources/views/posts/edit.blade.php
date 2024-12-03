@@ -1,9 +1,9 @@
 <x-layout>
 	<main>
-		<a href="{{ route('dashboard') }}" class="breadcrumb">&#8592; Volver a tu panel</a> {{-- Enlace miga de pan --}} 
+		<a href="{{ route('dashboard') }}" class="breadcrumb">&#8592; {{ __('Volver a tu panel') }}</a> {{-- Enlace miga de pan --}} 
 	
 		<div class="dash card">
-			<h3>Editar post</h3>
+			<h3>{{ __('Editar post') }}</h3>
 	
 			<form action="{{ route('posts.update', $post) }}" method="post" enctype="multipart/form-data">
 				@csrf
@@ -18,7 +18,7 @@
 				{{-- Imagen de portada si existe --}}
 				@if ($post->image)
 					<div>
-						<label>Imagen de portada </label>
+						<label>{{ __('Imagen de portada') }}</label>
 						<img src="{{ asset('storage/' . $post->image) }}" alt="" class="crud-img"> {{-- función asset() busca dentro de /public y concadeno (.) el nombre de la imagen--}}
 					</div>
 				@endif
@@ -27,7 +27,7 @@
 				<x-imageField />
 	
 				{{-- Botón para crear post --}}
-				<button class="btn" x-ref="btn">Actualizar</button>
+				<button class="btn" x-ref="btn">{{ __('Actualizar') }}</button>
 	
 			</form>
 		</div>

@@ -15,7 +15,7 @@
 
         {{-- Autor y fecha del post --}}
         <div>
-            <span>publicado {{ $post->created_at->diffForHumans() }} por</span> {{-- obtengo la fecha de cada post de la base de datos y la convierto a un formato más legible para humanos con la función diffForHumans() (en inglés por defecto desafortunadamente) --}}
+            <span>{{ __('publicado ') }}{{ $post->created_at->diffForHumans() }}{{ __(' por') }}</span> {{-- obtengo la fecha de cada post de la base de datos y la convierto a un formato más legible para humanos con la función diffForHumans() (en inglés por defecto desafortunadamente) --}}
             <a href="{{ route('userposts', $post->user ) }}" {{-- al linkear la ruta userposts, le paso también un segundo parametro que va a ser la instancia del usuario, gracias a que he creado la relación uno muchos entre post y user. --}}>{{ $post->user->username }}</a> {{-- parecido a lo de antes, obtengo el nombre de usuario a través de la relación uno muchos entre post y user, obtengo el usuario al que pertenece el post y de eso luego obtengo el nombre de usuario. --}}
         </div>
 
@@ -25,7 +25,7 @@
                 <span>{{ $post->body }} </span> {{-- obtengo el mensaje de cada post de la base de datos. --}}
             @else
                 <span>{{ Str::words($post->body, 10) }} </span> {{-- obtengo el mensaje de cada post de la base de datos y uso esta función words para mostrar solo 10 palabras. --}}
-                <a href="{{ route('posts.show', $post) }}">&nbsp; Leer más &rarr;</a> {{-- añado un link para poder leer el post completo. --}}
+                <a href="{{ route('posts.show', $post) }}">&nbsp; {{ __('Leer más') }} &rarr;</a> {{-- añado un link para poder leer el post completo. --}}
             @endif
         </div>
 

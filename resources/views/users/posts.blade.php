@@ -1,6 +1,6 @@
 <x-layout>
     <main>
-		<h1>Posts de {{ $user->username }} {{-- puedo obtener el nombre de usuario gracias a la variable user que cree en el controlador --}} |  {{ $posts->total()}} {{-- obtengo el número de posts totales de este usuario. Con count () solo obtendría el número de posts por página. --}}</h1>
+		<h1>{{ __('Posts de ') }}{{ $user->username }}</h1> {{-- puedo obtener el nombre de usuario gracias a la variable user que cree en el controlador --}} |  {{ $posts->total()}} {{-- obtengo el número de posts totales de este usuario. Con count () solo obtendría el número de posts por página. --}}
 		{{-- Posts del usuario--}}
 		<div class="posts-grid">
 			@foreach ($posts as $post) {{-- directiva @foreach de Laravel que funciona igual que un bucle for each --}}

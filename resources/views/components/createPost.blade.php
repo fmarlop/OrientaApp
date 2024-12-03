@@ -1,6 +1,6 @@
 
 <div class="dash card">
-    <h3>Crear un nuevo post</h3>
+    <h3>{{ __('Crear un nuevo post') }}</h3>
 
     {{-- Mensaje de sesión --}}
     @if (session('success'))
@@ -23,7 +23,7 @@
         <x-imageField />
 
         {{-- Botón para crear post --}}
-        <button class="btn" x-ref="btn">Crear</button>
+        <button class="btn" x-ref="btn">{{ __('Crear') }}</button>
 
     </form>
 </div>

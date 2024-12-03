@@ -4,7 +4,7 @@
     <div>
         {{-- Autor y fecha del post --}}
         <div>
-            <span>publicado {{ $comment->created_at->diffForHumans() }} por</span> {{-- obtengo la fecha de cada post de la base de datos y la convierto a un formato más legible para humanos con la función diffForHumans() (en inglés por defecto desafortunadamente) --}}
+            <span>{{ __('publicado ') }}{{ $comment->created_at->diffForHumans() }}{{ __(' por') }}</span> {{-- obtengo la fecha de cada post de la base de datos y la convierto a un formato más legible para humanos con la función diffForHumans() (en inglés por defecto desafortunadamente) --}}
             <a href="{{ route('userposts', $comment->user ) }}" {{-- al linkear la ruta userposts, le paso también un segundo parametro que va a ser la instancia del usuario, gracias a que he creado la relación uno muchos entre post y user. --}}>{{ $comment->user->username }}</a> {{-- parecido a lo de antes, obtengo el nombre de usuario a través de la relación uno muchos entre post y user, obtengo el usuario al que pertenece el post y de eso luego obtengo el nombre de usuario. --}}
         </div>
 

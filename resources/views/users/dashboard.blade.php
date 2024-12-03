@@ -1,12 +1,12 @@
 <x-layout>
 	<main>
-		<h1>Hola {{ auth()->user()->username }}, tienes {{ $posts->total() }} posts</h1>
+		<h1>{{ __('Hola ') }}{{ auth()->user()->username }}{{ __(', tienes ') }}{{ $posts->total() }}{{ __(' posts') }}</h1>
 	
 		{{-- Crear post --}}
 		<x-createPost />
 	
 		{{-- Posts del usuario --}}
-		<h3>Tus últimos posts</h3>
+		<h3>{{ __('Tus últimos posts') }}</h3>
 	
 		<div class="posts-grid">
 			@foreach ($posts as $post) {{-- directiva @foreach de Laravel que funciona igual que un bucle for each --}}

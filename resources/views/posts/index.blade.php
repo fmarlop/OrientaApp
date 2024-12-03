@@ -1,6 +1,6 @@
 <x-layout>
 	<main>
-		<h1>Últimos Posts</h1>
+		<h1>{{ __('Últimos Posts') }}</h1>
 		
 		<div class="posts-grid">
 			@foreach ($posts as $post) {{-- directiva @foreach de Laravel que funciona igual que un bucle for each --}}

@@ -41,25 +41,37 @@
         @apply w-24;
     }
     .lang{ /* selector de idiomas */
-        @apply inline-flex min-w-28
+        @apply relative inline-block min-w-28 ml-auto px-2 z-50;
+    }
+    .lang button{
+        @apply inline-flex items-center px-4 py-2 text-sm font-medium text-slate-800 bg-slate-200 border border-indigo-700/30 rounded-lg shadow-md hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50;
+    }
+    .lang svg{
+        @apply w-5 h-5 ml-1;
+    }
+    .lang div{
+        @apply block absolute bg-slate-200 border border-indigo-700/30 rounded-lg shadow-lg min-w-24 mt-1;
+    }
+    .lang a{
+        @apply block px-4 py-2 text-sm text-slate-800 hover:bg-slate-100;
     }
     .lang img{
-        @apply w-8 h-6
-    }
-    .deploy-box { /* caja con boton y menu desplegable */
-        @apply relative grid place-items-center;
+        @apply w-8 h-6 mr-2 inline;
     }
     .round-btn { /* boton redondo de usuario logeado */
-        @apply w-10 h-10 overflow-auto rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-100 focus:ring-offset-2 focus:ring-offset-slate-800;
+        @apply w-12 h-12 overflow-auto rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-100 focus:ring-offset-2 focus:ring-offset-slate-800;
+    }
+    .deploy-box { /* caja con boton y menu desplegable */
+        @apply relative grid place-items-center px-4;
     }
     .deployable { /* menu desplegable */
-        @apply bg-white text-slate-700 shadow-lg absolute top-10 right-0 rounded-lg;
+        @apply bg-slate-200 text-slate-800 shadow-lg absolute top-14 right-4 rounded-lg z-50;
     }
     .deployable p { /* menu desplegable nombre usuario */
-        @apply block py-2 pl-4 pr-8 border-b text-xs;
+        @apply block py-2 pl-4 pr-8 border-b;
     }
-    .deployable a, .deployable button { /* menu desplegable link y botón */
-        @apply block hover:bg-slate-100 text-slate-700 pl-4 pr-8 py-2 text-left text-base rounded-none;
+    .deployable a, .deployable form button { /* menu desplegable link y botón */
+        @apply block hover:bg-slate-100 text-slate-800 pl-4 pr-8 py-2 text-left text-base rounded-lg w-full;
     }
     .breadcrumb {
         @apply block mb-2 text-xs text-indigo-500;

@@ -1,6 +1,6 @@
 
 <div class="dash card">
-    <h3>Crear un nuevo comentario</h3>
+    <h3>{{ __('Crear un nuevo comentario') }}</h3>
 
     {{-- Mensaje de sesión --}}
     @if (session('success'))
@@ -19,7 +19,7 @@
         <input type="hidden" name="post_id" value="{{ $post->id }}"> {{-- campo oculto para pasar el post_id--}}
 
         {{-- Botón para crear comentario --}}
-        <button class="btn" x-ref="btn">Crear</button>
+        <button class="btn" x-ref="btn">{{ __('Crear') }}</button>
 
     </form>
 </div>

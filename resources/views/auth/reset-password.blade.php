@@ -1,6 +1,6 @@
 <x-layout>
 	<main>
-		<h1>Resetea tu contraseña</h1>
+		<h1>{{ __('Resetea tu contraseña') }}</h1>
 		<div class="card">
 			<form action="{{ route('password.update') }}" method="post">
 				@csrf {{-- directiva obligatoria para los formularios con método post, genera un token que se encarga de seguridad --}}
@@ -17,7 +17,7 @@
 				<x-passconfField />
 	
 				{{-- Botón Resetear --}}
-				<button class="btn" x-ref="btn">Resetear contraseña</button>
+				<button class="btn" x-ref="btn">{{ __('Resetear contraseña') }}</button>
 			</form>
 		</div>
 	</main>
