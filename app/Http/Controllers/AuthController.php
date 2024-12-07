@@ -8,6 +8,9 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use LdapRecord\Container;
+use LdapRecord\Connection;
+use LdapRecord\Models\Entry;
 
 class AuthController extends Controller
 {
@@ -21,7 +24,7 @@ class AuthController extends Controller
         $fields = $request->validate([ // función del objeto request que toma un array asociativo, las llaves son inputs de formulario y los valores son reglas de Laravel. https://laravel.com/docs/11.x/validation#available-validation-rules link a la documentación de las reglas de validación de Laravel.
             'username' => ['required', 'max:255'],
             'email' => ['required', 'max:255', 'email', 'unique:users'], // con 'unique' indicamos en qué tabla tiene que buscar la columna 'email' para comprobar que es un email único.
-            'password' => ['required', 'min:3', 'confirmed'], // Laravel hashea la contraseña automáticamente.
+            'password' => ['required', 'min:3', 'confirmed'], // Laravel hashea la contraseña automáticamente, si el campo se llama 'password' como es el caso.
             'subscribed' => ['required', 'boolean']
         ]);
 
@@ -61,7 +64,62 @@ class AuthController extends Controller
         
         // Validar
         $fields = $request->validate([
-            'email' => ['required', 'max:255', 'email'],
+            // 'email' => ['required', 'max:255', 'email'],
+            'username' => ['required', 'max:255'],
+            'password' => ['required']
+        ]);
+
+        // Establecer conexión con el servidor LDAP
+        $connection = new Connection([
+            'hosts' => ['ldap.forumsys.com'],
+            'port' => 389,
+            'base_dn' => 'dc=example,dc=com',
+            'username' => 'cn=read-only-admin,dc=example,dc=com',
+            'password' => 'password',
+        ]);
+        Container::addConnection($connection, 'default'); // almaceno la conexión.
+
+        // ('cn=read-only-admin,dc=example,dc=com', 'password', $stayAuthenticated = true)
+        // if ($connection->auth()->attempt($dn, $fields['password'], $stayAuthenticated)) {
+
+        // Autenticación contra LDAP
+        $dn = 'uid='.$fields['username'].',dc=example,dc=com';
+        $stayAuthenticated = $request->boolean('remember', false);
+        if ($connection->auth()->attempt($dn, $fields['password'], $stayAuthenticated)) { // método de la libreria ldaprecord para autenticar al usuario de ldap.
+
+            $entry = Entry::find($dn);
+            $email = $entry->mail; // obtengo el mail del usuario ldap.
+
+            $user = User::where('username', $fields['username'])->first(); // busco al usuario en la base de datos local.
+            if (!$user) { // si no existe el usuario, lo creo.
+                $user = User::create([
+                    'username' => $fields['username'],
+                    'email' => $email[0],
+                    'password' => bcrypt($fields['password']),
+                    'subscribed' => 0,
+                ]);
+                
+                event(new Registered($user)); // esto activará el verificado obligatorio de mail. Registered es un evento built-in.
+            }
+            // Iniciar sesión al usuario en Laravel
+            Auth::login($user, $request->remember);
+            
+            return redirect()->intended(route('dashboard')); // si el logeo es exitoso, se nos redirige a la página que el usuario estaba intentando acceder sin estar logeado, por defecto redirige a la página principal, en este caso está especificado el panel del usuario.
+
+        } else {
+            return back()->withErrors([ // uso función 'back()' para devolver al usuario a la página de logeo.
+                'failed' => 'El nombre de usuario o la contraseña no existen.' // uso la función 'withErrors()' pasándole un array asociativo que muestra este mensaje cuando el logeo falla.
+            ]);
+        }
+    }
+
+    // Logear usuario (sin LDAP)
+    public function login2(Request $request){
+    
+        // Validar
+        $fields = $request->validate([
+            // 'email' => ['required', 'max:255', 'email'],
+            'username' => ['required', 'max:255'],
             'password' => ['required']
         ]);
 
@@ -72,7 +130,7 @@ class AuthController extends Controller
             return back()->withErrors([ // uso función 'back()' para devolver al usuario a la página de logeo
                 'failed' => 'El email o la contraseña no existen.' // uso la función 'withErrors()' pasándole un array asociativo que muestra este mensaje cuando el logeo falla.
             ]);
-        } 
+        }
     }
 
     // Cerrar Sesión

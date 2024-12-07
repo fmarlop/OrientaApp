@@ -55,9 +55,12 @@ Route::middleware('guest')->group(function() {
  
     Route::view('/registrar', 'auth.register')->name('register');
     Route::post('/registrar', [AuthController::class, 'register']); // las clases de AuthController procesarán los formularios.
-    
+
     Route::view('/logear', 'auth.login')->name('login');
     Route::post('/logear', [AuthController::class, 'login']);
+
+    Route::view('/logear2', 'auth.login2')->name('login2');
+    Route::post('/logear2', [AuthController::class, 'login2']); // página oculta para probar el login sin autenticación contra ldap.
 
     Route::view('/forgot-password', 'auth.forgot-password')->name('password.request'); // restablecer contraseña.
     Route::post('/forgot-password', [ResetPasswordController::class, 'passwordEmail'])->name('password.email'); // no haría falta el name password.email porque como las anteriores rutas tiene la misma uri que password.request.

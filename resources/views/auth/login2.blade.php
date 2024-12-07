@@ -8,7 +8,7 @@
 		@endif
 	
 		<div class="card">
-			<form action="{{ route('login') }}" method="post">
+			<form action="{{ route('login2') }}" method="post">
 				@csrf {{-- directiva obligatoria para los formularios con método post, genera un token que se encarga de seguridad --}}
 				
 				{{-- Nombre de usuario --}}
