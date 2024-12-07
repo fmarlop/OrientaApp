@@ -28,6 +28,28 @@ class AuthController extends Controller
             'subscribed' => ['required', 'boolean']
         ]);
 
+        /*
+        // Establecer conexión con el servidor LDAP
+        $connection = new Connection([
+            'hosts' => ['ldap.forumsys.com'],
+            'port' => 389,
+            'base_dn' => 'dc=example,dc=com',
+            'username' => 'cn=read-only-admin,dc=example,dc=com',
+            'password' => 'password',
+        ]);
+        Container::addConnection($connection, 'default'); // almaceno la conexión.
+
+        // Registrar usuario en servidor LDAP
+        $entry = new Entry();
+        $entry->setDn('uid='.$fields['username'].',dc=example,dc=com');
+        $entry->setAttribute('cn', $fields['username']);
+        // $entry->setAttribute('sn', $fields['username']);
+        $entry->setAttribute('mail', $fields['email']);
+        $entry->setAttribute('userPassword', $fields['password']);
+        $entry->setAttribute('objectClass', ['top', 'person', 'organizationalPerson', 'inetOrgPerson']);
+        $entry->save();
+        */
+
         // Registrar
         $user = User::create($fields); // uso modelo User para crear una instancia del modelo con los mismos campos con los que hemos validado.
 
