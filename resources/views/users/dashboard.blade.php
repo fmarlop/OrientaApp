@@ -16,5 +16,22 @@
 			@endforeach
 		</div>
 		<x-postLinks :posts="$posts" />
+
+		<h3>{{ __('Manual de Usuario') }}</h3>
+
+		@php
+			// dd(app()->getLocale());
+			if (app()->getLocale() == 'es') {
+				$manual = asset('storage/manuals/Manual de Usuario - Orienta App.pdf');
+			}
+			else {
+				$manual = asset('storage/manuals/User Manual - Orienta App.pdf');
+			}
+		@endphp
+
+		<a href="{{$manual}}" download>
+			{{ __('Descargar el Manual de usuario de Orienta') }}
+		</a>
+
 	</main>
 </x-layout>
