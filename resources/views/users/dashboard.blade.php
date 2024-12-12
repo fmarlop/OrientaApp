@@ -29,9 +29,7 @@
 			}
 		@endphp
 
-		<a href="{{$manual}}" download>
-			{{ __('Descargar el Manual de usuario de Orienta') }}
-		</a>
+		<a href="{{$manual}}" download> {{ __('Descargar el Manual de usuario de Orienta') }} </a>
 
 	</main>
 </x-layout>
