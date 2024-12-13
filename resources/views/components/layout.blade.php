@@ -78,7 +78,7 @@
                     this.$refs.btn.innerHTML =
                         `<span class="absolute left-2 top-1/2 -translate-y-1/2 transform">
                         <i class="fa-solid fa-spinner animate-spin"></i>
-                        </span>Espere por favor...`;
+                        </span>{{ __('Espere por favor...')}}`;
 
                     this.$el.submit()
                 }
