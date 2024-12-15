@@ -1,31 +1,31 @@
 version: 0.2
 
 phases:
-	pre_build:
-		commands:
-			- aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 311141548936.dkr.ecr.eu-west-1.amazonaws.com
+  pre_build:
+    commands:
+      - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 311141548936.dkr.ecr.eu-west-1.amazonaws.com
 	build:
 		commands:
-			- docker build -t orientaapp-workspace ./dockers/workspace
-			- docker build -t orientaapp-mysql ./dockers/mysql
-			- docker build -t orientaapp-nginx ./dockers/nginx
-			- docker build -t orientaapp-php-fpm ./dockers/php-fpm
-			- docker build -t orientaapp-phpmyadmin ./dockers/phpmyadmin
-			- docker build -t orientaapp-redis ./dockers/redis
-			- docker build -t orientaapp-dind --file Dockerfile.dind .
-			- docker tag orientaapp-workspace:latest 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-workspace:latest
-			- docker tag orientaapp-mysql:latest 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-mysql:latest
-			- docker tag orientaapp-nginx:latest 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-nginx:latest
-			- docker tag orientaapp-php-fpm:latest 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-php-fpm:latest
-			- docker tag orientaapp-phpmyadmin:latest 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-phpmyadmin:latest
-			- docker tag orientaapp-redis:latest 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-redis:latest
-			- docker tag orientaapp-dind:latest 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-dind:latest
-	post_build:
-		commands:
-			- docker push 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-workspace:latest
-			- docker push 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-mysql:latest
-			- docker push 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-nginx:latest
-			- docker push 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-php-fpm:latest
-			- docker push 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-phpmyadmin:latest
-			- docker push 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-redis:latest
-			- docker push 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-dind:latest
+      - docker build -t orientaapp-workspace ./dockers/workspace
+      - docker build -t orientaapp-mysql ./dockers/mysql
+      - docker build -t orientaapp-nginx ./dockers/nginx
+      - docker build -t orientaapp-php-fpm ./dockers/php-fpm
+      - docker build -t orientaapp-phpmyadmin ./dockers/phpmyadmin
+      - docker build -t orientaapp-redis ./dockers/redis
+      - docker build -t orientaapp-dind --file Dockerfile.dind .
+      - docker tag orientaapp-workspace:latest 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-workspace:latest
+      - docker tag orientaapp-mysql:latest 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-mysql:latest
+      - docker tag orientaapp-nginx:latest 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-nginx:latest
+      - docker tag orientaapp-php-fpm:latest 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-php-fpm:latest
+      - docker tag orientaapp-phpmyadmin:latest 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-phpmyadmin:latest
+      - docker tag orientaapp-redis:latest 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-redis:latest
+      - docker tag orientaapp-dind:latest 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-dind:latest
+  post_build:
+    commands:
+      - docker push 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-workspace:latest
+      - docker push 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-mysql:latest
+      - docker push 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-nginx:latest
+      - docker push 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-php-fpm:latest
+      - docker push 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-phpmyadmin:latest
+      - docker push 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-redis:latest
+      - docker push 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-dind:latest
