@@ -1,12 +1,11 @@
 version: 0.2
 
 phases:
-  pre_build:
-    commands:
+	pre_build:
+		commands:
 			- aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 311141548936.dkr.ecr.eu-west-1.amazonaws.com
-
-  build:
-    commands:
+	build:
+		commands:
 			- docker build -t orientaapp-workspace ./dockers/workspace
 			- docker build -t orientaapp-mysql ./dockers/mysql
 			- docker build -t orientaapp-nginx ./dockers/nginx
@@ -21,9 +20,8 @@ phases:
 			- docker tag orientaapp-phpmyadmin:latest 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-phpmyadmin:latest
 			- docker tag orientaapp-redis:latest 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-redis:latest
 			- docker tag orientaapp-dind:latest 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-dind:latest
-
-  post_build:
-    commands:
+	post_build:
+		commands:
 			- docker push 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-workspace:latest
 			- docker push 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-mysql:latest
 			- docker push 311141548936.dkr.ecr.eu-west-1.amazonaws.com/orientaapp-nginx:latest
