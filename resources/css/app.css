@@ -35,25 +35,25 @@
         @apply flex items-center gap-4;
     }
     nav a { /* links navegacion */
-        @apply active:bg-slate-950/10 hover:bg-slate-400/10 text-slate-200 px-3 py-1 rounded-lg font-medium text-lg;
+        @apply active:bg-slate-950/10 hover:bg-slate-400/10 text-slate-200 px-1 py-1 rounded-lg font-medium text-sm sm:text-lg;
     }
     .home-btn { /* boton home */
-        @apply w-24;
+        @apply w-16;
     }
     .lang{ /* selector de idiomas */
-        @apply relative inline-block min-w-28 ml-auto px-2 z-50;
+        @apply relative inline-block ml-auto px-3 z-50;
     }
     .lang button{
-        @apply inline-flex items-center px-4 py-2 text-sm font-medium text-slate-800 bg-slate-200 border border-indigo-700/30 rounded-lg shadow-md hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50;
+        @apply inline-flex items-center px-3 py-2 text-sm font-medium text-slate-800 bg-slate-200 border border-indigo-700/30 rounded-lg shadow-md hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50;
     }
     .lang svg{
-        @apply w-5 h-5 ml-1;
+        @apply w-4 h-4 ml-1;
     }
     .lang div{
-        @apply block absolute bg-slate-200 border border-indigo-700/30 rounded-lg shadow-lg min-w-24 mt-1;
+        @apply block absolute bg-slate-200 border border-indigo-700/30 rounded-lg shadow-lg mt-1;
     }
     .lang a{
-        @apply block px-4 py-2 text-sm text-slate-800 hover:bg-slate-100;
+        @apply block px-3 py-2 text-sm text-slate-800 hover:bg-slate-100;
     }
     .lang img{
         @apply w-8 h-6 mr-2 inline;

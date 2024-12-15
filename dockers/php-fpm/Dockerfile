@@ -734,7 +734,7 @@ RUN if [ ${INSTALL_GHOSTSCRIPT} = true ]; then \
 # LDAP:
 ###########################################################################
 
-ARG INSTALL_LDAP=false
+ARG INSTALL_LDAP=true
 
 RUN if [ ${INSTALL_LDAP} = true ]; then \
     apt-get install -yqq libldap2-dev && \
