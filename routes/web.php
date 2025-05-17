@@ -21,6 +21,11 @@ Route::resource('comments', CommentController::class); // método resource() par
 
 Route::get('/{user}/posts', [DashboardController::class, 'userPosts'])->name('userposts'); // para crear una página dinámica de posts del usuario para cada usuario necesito bindear modelo usuario para usar la instancia del usuario como parametro para la uri, con las llaves {}.
 
+Route::view('/sections', 'posts.sections')->name('nav.sections');
+Route::view('/self-knowledge', 'posts.self-knowledge')->name('nav.self-knowledge');
+Route::view('/action-plan', 'posts.action-plan')->name('nav.action-plan');
+Route::view('/extras', 'posts.extras')->name('nav.extras');
+
 Route::get('/compprefmain', [CompPrefTestController::class, 'prerender'])->name('compprefmain');
 
 Route::get('lang/{locale}', function ($locale) { // para cambiar el locale

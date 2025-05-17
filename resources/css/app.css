@@ -11,6 +11,7 @@
     }
 }
 
+
 @layer components {
     /* layout */
     body {
@@ -34,8 +35,32 @@
     .link-group { /* grupos de links en nav */
         @apply flex items-center gap-4;
     }
+    .link-group div {
+        @apply hidden sm:flex gap-2 items-center;
+    }
+    .link-group div div div { /* boton desplegable de secciones en nav */
+        @apply absolute bg-slate-100 shadow-md rounded mt-44 z-50 p-2 flex-col;
+    }
+    .link-group div div div a {
+        @apply block w-full px-4 hover:bg-slate-400/10 text-slate-700;
+    }
+    .hidden-flex { /* clase para ocultar elementos en movil */
+        @apply hidden sm:flex;
+    }
+    .ham { /* boton de hamburguesa (movil) */
+        @apply sm:hidden text-slate-300;
+    }
+    .mobile { /* menu desplegable movil */
+        @apply absolute w-full bg-slate-100 shadow-md top-20 z-50 left-0 sm:hidden p-3;
+    }
+    .mobile p { /* texto de bienvenida */
+        @apply text-slate-700 font-bold text-base px-2;
+    }
+    .mobile a, .mobile button { 
+        @apply block w-full text-slate-700 text-left text-base hover:bg-slate-400/10 px-4 py-2 rounded-lg;
+    }
     nav a { /* links navegacion */
-        @apply active:bg-slate-950/10 hover:bg-slate-400/10 text-slate-200 px-1 py-1 rounded-lg font-medium text-sm sm:text-lg;
+        @apply active:bg-slate-950/10 hover:bg-slate-400/10 text-slate-200 px-2 py-1 rounded-lg font-medium text-sm sm:text-lg;
     }
     .home-btn { /* boton home */
         @apply w-16;
@@ -82,7 +107,7 @@
 
     /* otros */
     h1 {
-        @apply font-bold text-3xl lg:text-4xl lg:m-6 my-6 text-center leading-9;
+        @apply font-bold text-3xl lg:text-4xl lg:m-6 my-6 py-4 text-center leading-9 text-slate-800;
     }
     h2 {
         @apply font-bold text-xl lg:text-2xl lg:m-6 mb-4;
@@ -99,7 +124,10 @@
     h6 {
         @apply font-bold text-base lg:text-lg lg:m-2 mb-4;
     }
-    a{
+    p {
+        @apply text-justify md:text-lg py-4;
+    }
+    a {
         @apply text-indigo-500 font-medium;
     }
     section { /* seccion del slideshow principal */
@@ -357,14 +385,20 @@
     .dash { /* tarjeta panel */
         @apply mb-6 max-w-screen-md;
     }
+    .category { /* tarjeta de categoria de secciones */
+        @apply w-3/4 mx-auto max-w-screen-md flex flex-col text-center items-center gap-6;
+    }
+    .category p:last-of-type {
+        @apply text-center text-lg md:text-xl;
+    }
+    .category p:last-of-type span {
+        @apply text-indigo-600;
+    }
     .pretest { /* tarjeta de pretests */
         @apply w-3/4 mx-auto max-w-screen-md flex flex-col text-center items-center gap-6;
     }
     .pretest img {
         @apply rounded-3xl w-full h-64 object-cover;
-    }
-    .pretest p {
-        @apply text-justify md:text-lg py-4;
     }
     .pretest a {
         @apply px-5 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md transition duration-300 ease-in-out hover:bg-indigo-600/80 mb-6;
