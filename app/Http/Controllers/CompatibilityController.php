@@ -152,7 +152,7 @@ class CompatibilityController extends Controller
                     $pPref = (($compPrefTest->flangPref*0.3 + $compPrefTest->slangPref*0.3 + $compPrefTest->langPref*0.25 + $compPrefTest->philPref*0.1 + $compPrefTest->geogPref*0.05) +2) *25;
                     break;    
             }
-            $escala = 6; // Grado de acercamiento al 0 o al 100, a partir de 2.5
+            $escala = 7; // Grado de acercamiento al 0 o al 100, a partir de 2.5
             $sesgo = 7; // Grado de sesgo hacia valores más altos, a partir de 1.5
             $promedio = $pComp * 0.4 + $pPref * 0.6;
             $ajustado = $promedio + ($sesgo - 1) * (50 - abs($promedio - 50)) / 50;

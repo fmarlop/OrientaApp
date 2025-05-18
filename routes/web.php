@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'posts.main')->name('home'); // renombro las rutas con esta función para que la navegación siga funcionando aunque cambie las URLs.
@@ -34,6 +35,19 @@ Route::get('lang/{locale}', function ($locale) { // para cambiar el locale
     }
     return redirect()->back();
 })->name('language.switch');
+
+Route::get('/weather', function () {
+    $latitude = 52.52;
+    $longitude = 13.41;
+    
+    $response = Http::get("https://api.open-meteo.com/v1/forecast", [
+        'latitude' => $latitude,
+        'longitude' => $longitude,
+        'current' => 'temperature_2m,wind_speed_10m',
+    ]);
+
+    return $response->json()['current'];
+});
 
 Route::middleware('auth')->group(function() { // '->middleware('auth')' Con esta función encadenada podría proteger el acceso a una ruta para usuarios no autenticados, y nos redirigiría automaticamente a la vista de logeo. Pero en vez de esto, voy a usar la función desde route para agrupar todas las rutas posibles. El método 'group()' toma una función callback con la que puedo envolver a las rutas.
     

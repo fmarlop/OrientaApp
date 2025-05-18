@@ -110,10 +110,83 @@
     
     {{ $slot }} {{-- uso variables especiales slot para mostrar datos/secciones dinámicas. --}}
     
-    <footer>
+    <footer x-data="weatherData('{{ app()->getLocale() }}')" x-init="fetchWeather()">
         <a href="#"><span>{{ __('Volver arriba') }}</span><i class="fa-regular fa-circle-up text-3xl animate-bounce"></i></a>
+        <div x-show="weather" class="weather"> {{-- API de clima https://open-meteo.com/ --}} 
+            <span x-text="formattedDate"></span> | <span x-text="weatherDescription"></span> | <span x-text="weather.temperature_2m + ' °C'"></span>
+        </div>
     </footer>
     
+    <script> // script para la API de clima
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('weatherData', (locale) => ({
+                weather: null,
+                formattedDate: '',
+                weatherDescription: '',
+                async fetchWeather() {
+                    try {
+                        navigator.geolocation.getCurrentPosition(
+                            async (pos) => {
+                                const lat = pos.coords.latitude;
+                                const lon = pos.coords.longitude;
+                                await this.getWeather(lat, lon, locale);
+                            },
+                            async () => {
+                                const { lat, lon } = this.getDefaultLocation(locale);
+                                await this.getWeather(lat, lon, locale);
+                            }
+                        );
+                    } catch (error) {
+                        console.error("Error al obtener el clima:", error);
+                    }
+                },
+                async getWeather(lat, lon, locale) {
+                    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    this.weather = data.current;
+
+                    const now = new Date();
+                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    this.formattedDate = now.toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', options);
+
+                    this.weatherDescription = this.interpretWeatherCode(this.weather.weather_code, locale);
+                },
+                getDefaultLocation(locale) { // para que haya una ciudad por defecto si el usuario no acepta dar su ubicación
+                    if (locale === 'es') {
+                        return { lat: 40.4168, lon: -3.7038 }; // Madrid
+                    } else {
+                        return { lat: 51.5074, lon: -0.1278 }; // Londres
+                    }
+                },
+                interpretWeatherCode(code, locale) { // para que aparezca un texto diferente según el código y el idioma
+                    const codes = {
+                        0: { es: "Despejado ☀️", en: "Clear ☀️" },
+                        1: { es: "Nubes y claros 🌤️", en: "Clouds and sun 🌤️" },
+                        2: { es: "Parcialmente nublado ⛅", en: "Partly cloudy ⛅" },
+                        3: { es: "Nublado ☁️", en: "Overcast ☁️" },
+                        45: { es: "Niebla 🌫️", en: "Fog 🌫️" },
+                        48: { es: "Niebla escarchada 🌫️", en: "Freezing fog 🌫️" },
+                        51: { es: "Llovizna ligera 🌦️", en: "Light drizzle 🌦️" },
+                        53: { es: "Llovizna moderada 🌦️", en: "Moderate drizzle 🌦️" },
+                        55: { es: "Llovizna densa 🌧️", en: "Dense drizzle 🌧️" },
+                        61: { es: "Lluvia ligera 🌧️", en: "Light rain 🌧️" },
+                        63: { es: "Lluvia moderada 🌧️", en: "Moderate rain 🌧️" },
+                        65: { es: "Lluvia fuerte ⛈️", en: "Heavy rain ⛈️" },
+                        71: { es: "Nieve ligera 🌨️", en: "Light snow 🌨️" },
+                        73: { es: "Nieve moderada ❄️", en: "Moderate snow ❄️" },
+                        75: { es: "Nieve intensa ❄️", en: "Heavy snow ❄️" },
+                        80: { es: "Chubascos ligeros 🌦️", en: "Light showers 🌦️" },
+                        81: { es: "Chubascos moderados 🌧️", en: "Moderate showers 🌧️" },
+                        82: { es: "Chubascos violentos ⛈️", en: "Violent showers ⛈️" },
+                        95: { es: "Tormenta 🌩️", en: "Thunderstorm 🌩️" },
+                        96: { es: "Tormenta con granizo 🧊", en: "Hail thunderstorm 🧊" },
+                    };
+                    return codes[code]?.[locale] || (locale === 'es' ? "Desconocido" : "Unknown");
+                }
+            }));
+        });
+    </script>
     <script> // script para que los botones de formularios reaccionen a la espera.
         // Colocar en formulario esto: x-data="formSubmit" @submit.prevent="submit" y en el botón esto: x-ref="btn".
         document.addEventListener('alpine:init', () => {

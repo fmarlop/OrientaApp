@@ -71,7 +71,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Consejo'],
             ['name' => 'Duda'],
             ['name' => 'Experiencia'],
-            ['name' => 'Feedback'],
+            ['name' => 'Valoración'],
         ];
         
         foreach ($categoriespredefinidas as $category) {
