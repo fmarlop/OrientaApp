@@ -1,5 +1,5 @@
 <x-layout>
-	<main>
+    <main x-data="{ showCreatePost: false }" class="relative">
 		<h1>{{ __('Últimos Posts') }}</h1>
 		
 		<div class="posts-grid">
@@ -8,6 +8,15 @@
 			@endforeach
 		</div>
 		<x-postLinks :posts="$posts" />
-		<x-createPost />
+
+		{{-- Botón de crear post --}}
+		<button @click="showCreatePost = !showCreatePost" class="create-post"> + {{ __('Crear post') }}</button>
+
+        {{-- Ventana flotante de crear post --}}
+        <div x-show="showCreatePost" x-transition:enter.duration.200ms x-transition:leave.duration.150ms class="create-post-window">
+            <div @click.away="showCreatePost = false">
+                <x-createPost />
+            </div>
+        </div>
 	</main>
 </x-layout>

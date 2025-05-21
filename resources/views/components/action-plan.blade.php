@@ -3,7 +3,7 @@
 <div class="menu-grid">
     <a href="{{ route('compatibility') }}">
         <div class="menu">
-            <img src="https://picsum.photos/300" alt="">
+            <img src="{{ asset('storage/web_images/familias.jpg') }}" alt="">
             <h2>{{ __('Compatibilidad de Familias Profesionales') }}</h2>
         </div>
     </a>

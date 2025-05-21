@@ -388,6 +388,15 @@
     .post-links {
         @apply m-4;
     }
+    .create-post { /* botón de crear post */
+        @apply fixed bottom-6 right-6 bg-indigo-600 hover:bg-indigo-500 text-white text-lg sm:bottom-8 sm:right-8 p-4 rounded-full shadow-lg z-40 transition;
+    }
+    .create-post-window { /* ventana de crear post */
+        @apply fixed inset-0 bg-black/60 flex items-center justify-center z-50;
+    }
+    .create-post-window div {
+        @apply px-4 max-w-xl w-full;
+    }
     .dash { /* tarjeta panel */
         @apply mb-6 max-w-screen-md;
     }
