@@ -8,6 +8,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use LdapRecord\Container;
 use LdapRecord\Connection;
 use LdapRecord\Models\Entry;
@@ -50,6 +51,7 @@ class AuthController extends Controller
         $entry->save();
         */
 
+        $fields['avatar'] = 'web_images/OrientaDefault.png'; // avatar por defecto.
         // Registrar
         $user = User::create($fields); // uso modelo User para crear una instancia del modelo con los mismos campos con los que hemos validado.
 
@@ -119,6 +121,7 @@ class AuthController extends Controller
                     'email' => $email[0],
                     'password' => bcrypt($fields['password']),
                     'subscribed' => 0,
+                    'avatar' => 'web_images/OrientaDefault.png', // avatar por defecto.
                 ]);
                 
                 event(new Registered($user)); // esto activará el verificado obligatorio de mail. Registered es un evento built-in.
@@ -153,6 +156,30 @@ class AuthController extends Controller
                 'failed' => 'El email o la contraseña no existen.' // uso la función 'withErrors()' pasándole un array asociativo que muestra este mensaje cuando el logeo falla.
             ]);
         }
+    }
+
+    // Cambiar Avatar
+    public function avatar(Request $request) {
+        $request->validate([
+            'avatar' => ['required', 'image', 'mimes:jpeg,jpg,png,webp', 'max:3000'],
+        ]);
+
+        $user = Auth::user();
+
+        // Borrar la imagen antigua
+        if ($user->avatar && $user->avatar !== 'web_images/OrientaDefault.png') {
+            // dd($user->avatar);
+            Storage::disk('public')->delete($user->avatar);
+        }
+
+        // Subir la nueva imagen
+        $path = $request->file('avatar')->store('avatar_images', 'public');
+        //$path = Storage::disk('public')->put('avatar_images', $request->file('avatar')); // otra manera de hacerlo.
+
+        // Actualizar el campo 'avatar'
+        $user->update(['avatar' => $path]);
+
+        return redirect()->route('dashboard')->with('message', 'Avatar actualizado correctamente.');
     }
 
     // Cerrar Sesión

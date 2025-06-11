@@ -1,0 +1,12 @@
+Los nombres de los usuarios registrados en el servidor LDAP de prueba https://www.forumsys.com/2022/05/10/online-ldap-test-server/ son:
+
+einstein
+euclid
+euler
+galieleo
+gauss
+newton
+riemann
+tesla
+
+La contraseña para todos los usuarios es 'password'.

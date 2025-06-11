@@ -54,7 +54,7 @@ class PostController extends Controller implements HasMiddleware // es interesan
         $fields = $request->validate([
             'title' => ['required', 'max:255'],
             'body' => ['required'],
-            'image' => ['nullable', 'file', 'mimes:jpg,png,webp', 'max:3000'] // campo image no requerido, es un archivo, con las extensiones especificadas y máximo 3000 kilobytes (3 megabytes más o menos). 
+            'image' => ['nullable', 'file', 'mimes:jpeg,jpg,png,webp', 'max:3000'] // campo image no requerido, es un archivo, con las extensiones especificadas y máximo 3000 kilobytes (3 megabytes más o menos). 
         ]);
 
         // Guardar imagen si existe

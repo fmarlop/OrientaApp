@@ -50,7 +50,7 @@
             <div class="deploy-box" x-data="{ prof: false }"> {{-- añado funcionalidad de Alpine.js a este contenedor con 'x-data', y defino la variable 'prof' --}}
                 {{-- Botón de menú desplegable --}}
                 <button x-on:click="prof = !prof" type="button" class="hidden-flex round-btn"> {{-- para que al clicar este botón conmute el valor de la variable 'prof', cambiando entre true o false, usando 'x-on' de Alpine.js (@click también es posible) --}}
-                    <img src="https://picsum.photos/200" alt="" /> {{-- la url de la imagen es una imagen random, más info en https://picsum.photos/. --}}
+                    <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="" /> {{-- Ruta al avatar del usuario, recordar crear link simbólico para que funcione. --}} {{--  https://picsum.photos/200 url para imagen random, más info en https://picsum.photos/ --}}
                 </button>
                 {{-- Menú desplegable --}}
                 <div x-show="prof" x-on:click.outside='prof=false' class="deployable"> {{-- para mostrar o no este contenido uso 'x-show' de Alpine.js que toma el valor de la variable 'prof'. Y si clico fuera del botón tampoco mostrará el contenido. --}}

@@ -299,7 +299,7 @@
         @apply inline w-auto;
     }
     .error { /* mensaje error */
-        @apply text-xs mt-px text-red-600;
+        @apply text-xs mt-px text-red-600 py-0;
     }
     .field-error { /* campo con error*/
         @apply ring-red-600;
@@ -323,7 +323,7 @@
         @apply grid grid-cols-1 p-6 place-items-center;
     }
     .posts-grid { /* rejilla de posts */
-        @apply grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 p-12 gap-x-12 gap-y-8;
+        @apply grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 px-12 gap-x-12 gap-y-8;
     }
     .menu-grid { /* rejilla del menu */
         @apply flex flex-wrap justify-evenly gap-20;
@@ -398,7 +398,10 @@
         @apply px-4 max-w-xl w-full;
     }
     .dash { /* tarjeta panel */
-        @apply mb-6 max-w-screen-md;
+        @apply relative mb-6 w-4/5 max-w-screen-md;
+    }
+    .dash .posts-grid {
+        @apply px-0 pb-4;
     }
     .category { /* tarjeta de categoria de secciones */
         @apply w-3/4 mx-auto max-w-screen-md flex flex-col text-center items-center gap-6;

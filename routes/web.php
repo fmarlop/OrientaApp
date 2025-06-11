@@ -36,7 +36,7 @@ Route::get('lang/{locale}', function ($locale) { // para cambiar el locale
     return redirect()->back();
 })->name('language.switch');
 
-Route::get('/weather', function () {
+Route::get('/weather', function () { // API del clima
     $latitude = 52.52;
     $longitude = 13.41;
     
@@ -52,6 +52,8 @@ Route::get('/weather', function () {
 Route::middleware('auth')->group(function() { // '->middleware('auth')' Con esta función encadenada podría proteger el acceso a una ruta para usuarios no autenticados, y nos redirigiría automaticamente a la vista de logeo. Pero en vez de esto, voy a usar la función desde route para agrupar todas las rutas posibles. El método 'group()' toma una función callback con la que puedo envolver a las rutas.
     
     Route::get('/panel', [DashboardController::class, 'index'])->middleware('verified')->name('dashboard'); // las clases de DashboardController nos darán las vistas de los paneles de usuarios logeados. Si el usuario no está verificado no podrá acceder al panel.
+
+    Route::post('/avatar', [AuthController::class, 'avatar'])->name('avatar'); // las clases de AuthController procesarán el formulario.
     
     Route::post('/delogear', [AuthController::class, 'logout'])->name('logout');
     

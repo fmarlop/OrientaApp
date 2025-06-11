@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('subscribed');
+            $table->string('avatar')->default('OrientaDefault.png');
             $table->rememberToken();
             $table->timestamps();
         });
